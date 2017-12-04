@@ -3,14 +3,12 @@
 services:
   mariadb: # by default, expose 3306 port
     image: mariadb:10.2
-    restart: always
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: humus
   mongodb:
     image: mongo:3.4
-    restart: always
     ports:
           - "27017:27017"
   backend:
