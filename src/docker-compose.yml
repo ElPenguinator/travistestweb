@@ -30,7 +30,6 @@ services:
     depends_on:
       - mariadb
       - mongodb
-    init: true
   frontend:
     build: ./front-src
     image: humus:front-dev
@@ -39,6 +38,5 @@ services:
       - /home/node/app/node_modules
     ports:
       - "4200:4200"
-    init: true
     links:
       - backend
