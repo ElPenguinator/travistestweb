@@ -10,6 +10,7 @@ node_js:
 before_install:
 - cd src/back-src
 - npm install -g node-gyp
+- npm install -g pm2
 - touch .env
 - echo "NODE_PORT=3000" >> .env
 before_script:
