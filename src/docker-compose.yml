@@ -1,5 +1,3 @@
-version: "2.3"
-
 #Database currently missing, to add later
 
 services:
