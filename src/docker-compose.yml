@@ -19,8 +19,8 @@ services:
     build: ./back-src
     image: humus:back-dev
     volumes:
-      - ./back-src:/home/node
-      - /home/node/node_modules
+      - ./back-src:/home/node/app/back-src
+      - /home/node/app/back-src/node_modules
     environment:
       - NODE_ENV=development
     env_file:
@@ -34,8 +34,8 @@ services:
     build: ./front-src
     image: humus:front-dev
     volumes:
-      - ./front-src:/home/node
-      - /home/node/node_modules
+      - ./front-src:/home/node/app/front-src
+      - /home/node/app/front-src/node_modules
     ports:
       - "4200:4200"
     links:
