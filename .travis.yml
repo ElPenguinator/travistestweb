@@ -13,7 +13,7 @@ before_install:
 - touch .env
 - echo "NODE_PORT=3000" >> .env
 before_script:
-- ls 
+- ls
 - npm install -g standard
 - npm install -g gulp-cli
 - docker-compose build

@@ -2,13 +2,13 @@ FROM node:9
 
 USER node
 
-WORKDIR /home/node
+WORKDIR /home/node/back-src
 
-COPY ./wait-for-it.sh /home/node
+COPY ./wait-for-it.sh /home/node/back-src
 
-COPY ./package.json /home/node
+COPY ./package.json /home/node/back-src
 
-COPY ./package-lock.json /home/node
+COPY ./package-lock.json /home/node/back-src
 
 RUN npm install
 
