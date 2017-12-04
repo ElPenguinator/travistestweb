@@ -10,14 +10,12 @@ node_js:
 before_install:
 - cd src/back-src
 - npm install -g node-gyp
-- npm install -g pm2
-- pm2 update
 - touch .env
 - echo "NODE_PORT=3000" >> .env
 before_script:
 - npm install -g standard
 - docker-compose build
-- docker-compose up
+- docker-compose up -d
 - sleep 3
 - mongo "localhost:27017/humus" --eval "db.dropDatabase();"
 script:
