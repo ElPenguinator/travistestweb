@@ -19,6 +19,8 @@ before_script:
 - sleep 3
 - mongo "localhost:27017/humus" --eval "db.dropDatabase();"
 script:
+- ls
+- docker-compose ps
 - npm test
 after_success:
 after_script:
