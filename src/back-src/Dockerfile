@@ -2,15 +2,15 @@ FROM node:9
 
 USER node
 
-RUN mkdir -p /home/node/back-src
+RUN mkdir -p /home/node/app/back-src
 
-WORKDIR /home/node/back-src
+WORKDIR /home/node/app/back-src
 
-COPY ./wait-for-it.sh /home/node/back-src
+COPY ./wait-for-it.sh /home/node/app/back-src
 
-COPY ./package.json /home/node/back-src
+COPY ./package.json /home/node/app/back-src
 
-COPY ./package-lock.json /home/node/back-src
+COPY ./package-lock.json /home/node/app/back-src
 
 RUN npm install
 
