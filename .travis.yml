@@ -15,7 +15,7 @@ before_install:
 before_script:
 - npm install -g standard
 - docker-compose build
-- docker-compose up
+- sudo docker-compose up
 - sleep 3
 - mongo "localhost:27017/humus" --eval "db.dropDatabase();"
 script:
