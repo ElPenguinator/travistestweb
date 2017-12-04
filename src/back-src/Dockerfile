@@ -2,21 +2,16 @@ FROM node:9
 
 USER node
 
-RUN mkdir /home/node/app
+WORKDIR /home/node
 
-WORKDIR /home/node/app
+COPY ./wait-for-it.sh /home/node
 
-COPY ./wait-for-it.sh /home/node/app
+COPY ./package.json /home/node
 
-COPY ./package.json /home/node/app
+COPY ./package-lock.json /home/node
 
-COPY ./package-lock.json /home/node/app
-
-RUN cd /home/node/app && npm install --save
-
-COPY . /home/node/app
+RUN npm install
 
 EXPOSE 3000
-EXPOSE 3306
 
 CMD ["./wait-for-it.sh", "mariadb:3306", "-t", "30", "--", "./wait-for-it.sh", "mongodb:27017", "-t", "30", "--", "npm", "run", "docker-dev"]
