@@ -1,0 +1,44 @@
+<section class="container">
+	<section class="card card-container">
+		<img src="assets/images/logo.svg" class="profile-img-card" height="200" alt="Humus logo">
+		<form
+			#f="ngForm"
+			(ngSubmit)="f.form.valid && onSignIn()" novalidate>
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+					<input
+						id="login" name="login"
+						placeholder="Login"
+						class="form-control input-lg"
+						#login="ngModel"
+						[(ngModel)]="form.username"
+						[disabled]="loading"
+						type="text" required autofocus />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+					<input
+						name="password" placeholder="Password"
+						class="form-control input-lg"
+						#password="ngModel"
+						[(ngModel)]="form.password"
+						[disabled]="loading"
+						type="password" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<button
+					id="submit" name="submit"
+					class="btn btn-lg btn-primary btn-block"
+					[disabled]="loading"
+					type="submit">Sign in</button>
+			</div>
+			<div>
+				<a routerLink="/signup">Create account</a> or <a routerLink="/resetPassword">reset password</a>
+			</div>
+		</form>
+	</section>
+</section>

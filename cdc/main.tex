@@ -1,0 +1,122 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{ae,lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{pgfornament} % rendre le document plus joli
+\usepackage{xcolor}
+%\usepackage[left=2.5cm,right=2cm,top=3cm,bottom=3cm,twoside]{geometry}
+\usepackage[french]{babel}
+
+\title{Cahier des charges\\Projet de programmation Web\\Master 2\\groupe 1 -- équipe 5}
+\begin{document}
+
+\maketitle
+
+\begin{flushright}
+	\textsf{Ludovic San Nicolas\\Shervin Sarain\\Dimitri Prestat}
+\end{flushright}
+
+\section{Préambule}
+	Ce projet consiste au développement d'une application web ayant pour propriétaire une association étudiante et pour utilisateurs les membres de cette association, des étudiants et des personnels extérieurs.
+
+\section{Contexte}
+	Dans le cadre de la gestion d'une association étudiante, ses membres souhaiteraient proposer plusieurs services aux étudiants.\\
+Les membres de l'association étant eux mêmes des étudiants, il faudra que l'interface soit simple à prendre en main et intuitive. La maintenance applicative devrait être inexistante.
+\par
+	Les services proposés par cette application concerneront plusieurs types d'utilisateurs :
+\begin{itemize}
+	\item\textbf{Les membres de l'association} devront avoir un espace dédié à la gestion de leurs activités au sein de l'association.
+	\item\textbf{Les étudiants} devront pouvoir consulter le site de l'association et avoir accès aux services proposés par l'association.
+	\item\textbf{Les externes}\footnote{\textbf{Externes} : Ou public, personnes n'ayant aucun lien avec l'association ou les étudiants concernés par l'association.} devront avoir accès aux informations publiques relative à l'association et également être en mesure de contacter l'association dans le cas de partenariats. 
+\end{itemize}
+
+\subsection{Services de l'association}
+	Une association étudiante peut proposer différents services aux étudiants qui y sont affiliés. La gestion de tous ces services pouvant prendre du temps, l'application devra être capable de centraliser les données relatives à ceux-ci ainsi que d'y fournir un accès simplifié.
+	
+\subsubsection{Évènements}
+	Une association peut créer et proposer à ses adhérents des évènements, ceux-ci doivent pouvoir être facilement gérés par l'application.
+\par
+	Un évènement est caractérisé par :
+\begin{itemize}
+	\item Une heure et une date
+	\item Une durée
+	\item Un titre et une description
+	\item Un lieu
+	\item Une liste de mots clés
+\end{itemize}
+Il est également envisageable, dans le cas d'un évènement ayant un nombre de participants limités, de s'y inscrire.
+\par
+	Ces évènements doivent pouvoir être créés facilement et modifiés en conséquence. Un service de notifications par mail peut leur être associé de telle sorte que toute personne le souhaitant doit pouvoir recevoir une notification en cas de modification de l'évènement.\\
+De plus, une partie du site doit y être consacrée, dans laquelle ils seront listés et où il sera possible d'y effectuer une recherche par mots clés.
+
+\subsubsection{Caisse et gestion de stocks}
+	Certaines associations proposent la vente de quelques collations et sucreries permettant, aux étudiants épuisés par leur travail quotidien, de reprendre leurs forces afin de tenir pour le reste de la journée. Cette partie de l'application est réservée aux membres de l'association.
+\par
+	Dans ce cas, l'association doit s'occuper de la gestion de stocks par rapport aux produits proposés et également une caisse afin d'enregistrer les recettes des ventes. Les stocks doivent pouvoir garder une trace des transactions passées et de l'état des stocks, ainsi que de l'argent présent dans la caisse.\\
+L'application peut également envisager de proposer sur la partie publique une liste des produits disponibles et en rupture de stocks, actualisée en temps réel.
+
+\subsubsection{Actualités}
+	Un service de news peut également être utile dans une association afin de faire parvenir à ses adhérents des informations ponctuelles. ce service n'est pas en concurrence avec les \textit{évènements} car il ne permet pas de définir de lieu ou de date mais juste de faire transiter de courts messages à caractère informatif.
+\par
+	Les news seraient regroupées en catégories définies par l'association de manière dynamique. Les adhérents auraient la possibilité de demander à être notifiés pour chaque catégorie de news, auquel cas ils recevront un mail à chaque publication. Et le site web devra proposer une catégorie dédiée dans laquelle on pourra retrouver les news déjà publiées et où des filtres pourront être appliqués.
+
+\subsubsection{Sondages}
+	A l'instar des évènements, les sondages serviraient à recueillir l'avis des personnes sur des thèmes aussi variés qu'improbables.
+\par
+	Un sondage est caractérisé par :
+\begin{itemize}
+	\item Une date de fin. Pas de date de début, on considère qu'il commence dès sa mise en ligne
+	\item Une catégorie de personnes ciblées : membres, adhérents ou tout public
+	\item Un titre et une description
+	\item Une liste de checkbox ou/et boutons radios pour recueillir l'avis du public
+	\item Possiblement des champs textes
+	\item La possibilité d'être anonyme ou nommé
+\end{itemize}
+
+	Les sondages peuvent être proposés par les membres et les utilisateurs. Une fois le sondage terminé, la personne l'ayant proposé en est notifiée et a la possibilité de générer automatiquement une news contenant les résultats du sondage.
+	
+	Les résultats du sondage peuvent être privés (membres de l'association uniquement), cercle restreint (membres et adhérents) ou publics (tout le monde). Une interface devra permettre de retrouver les résultats de chaque sondage.
+
+	L'application contiendra un filtre ne permettant pas de poster de sondage contenant les mots \og Chocolatine \fg{} et \og Pain au chocolat \fg{}.\\
+Les sondages internes (membres) permettront d'éviter quelques escarmouches lors de décisions prises à huis clos.
+
+\subsubsection{Chat}% 😺😸
+	Pour communiquer entre eux, les étudiants pourront compter sur un service de chat permettant de se connecter à une conversation et interagir avec elle.
+	
+	Cette conversation devra utiliser des websockets et ne contiendra pas d'historique du côté du serveur. Si un utilisateur se connecte alors il téléchargera les $x$ derniers messages qui auront transités mais si tout le monde quitte la conversation alors le groupe est supprimé.
+	
+	Il doit donc y avoir la possibilité de créer une conversation et ajouter des personnes dessus. Renommer la conversation et la rendre publique ou privée.\\
+Les conversations publiques apparaissent dans une liste permettant des les rejoindre et les conversations privées ne sont joignables qu'avec leur URL.
+
+	Le service de chat n'est accessible qu'aux membres de l'association et aux étudiants.
+
+\section{API}
+	Une partie des informations pourra être accessible via une API REST, laquelle permettra de consommer ses services en mode authentifié ou non.
+\par
+\begin{table}[h]
+	\centering
+	\caption{Services accessibles en fonction de l'utilisateur}
+	\label{my-label}
+	\begin{tabular}{|l|c|c|c|}
+		\hline
+		\textit{\textbf{service}} & \textbf{public} & \textbf{adhérent} & \textbf{membre} \\\hline
+		Liste des évènements					& public & public, adhérent & tous \\
+		Description détaillée d'un évènement	& non & public, adhérent & tous \\
+		État des stocks en temps réel			& en stock & quantité & quantité \\
+		Liste des news							& non & oui & oui \\
+		Description détaillée d'une news		& non & oui & oui \\
+		Liste des sondages						& public & public, adhérent & tous \\
+		Contenu détaillé d'un sondage			& public & public, adhérent & tous \\\hline
+	\end{tabular}
+\end{table}
+
+	L'API permettra de transférer ces résultats aux formats : JSON, XML et YAML.
+	
+\section{Technologie \& contraintes}
+	L'application sera codée en NodeJS et utilisera une base de données MariaDB.
+
+\end{document}
+

@@ -1,0 +1,44 @@
+version: "2.3"
+
+#Database currently missing, to add later
+
+services:
+  mariadb: # by default, expose 3306 port
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: humus
+  mongodb:
+    image: mongo:3.4
+    restart: always
+    ports:
+          - "27017:27017"
+  backend:
+    build: ./back-src
+    image: humus:back-dev
+    volumes:
+      - ./back-src:/home/node/app
+      - /home/node/app/node_modules
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - back-src/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mariadb
+      - mongodb
+    init: true
+  frontend:
+    build: ./front-src
+    image: humus:front-dev
+    volumes:
+      - ./front-src:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "4200:4200"
+    init: true
+    links:
+      - backend

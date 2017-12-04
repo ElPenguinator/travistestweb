@@ -1,0 +1,385 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Application web pour la gestion d'associations étudiantes.",
+    "version": "1.0.0",
+    "title": "Humus",
+    "contact": {
+      "email": "dimitri.prestat@u-bordeaux.fr"
+    }
+  },
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user"
+    },
+    {
+      "name": "news",
+      "description": "Operations about news"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/users/": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation."
+          },
+          "400": {
+            "description": "Invalid username/password supplied."
+          },
+          "409": {
+            "description": "Username already exists."
+          },
+          "422": {
+            "description": "Missing Arguments."
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Modify user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "modifyUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation."
+          },
+          "400": {
+            "description": "Invalid username/password supplied."
+          },
+          "409": {
+            "description": "Username already exists."
+          },
+          "422": {
+            "description": "Missing Arguments."
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      }
+    },
+    "/api/users/role/{login}": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Set roles of an user",
+        "description": "",
+        "operationId": "setRoleUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The added and deleted roles",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Roles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          },
+          "422": {
+            "description": "Missing Arguments."
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      }
+    },
+    "/api/users/token": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          },
+          "422": {
+            "description": "Missing Arguments."
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      }
+    },
+    "/api/users/{login}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by login",
+        "description": "",
+        "operationId": "getUserByName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "path",
+            "description": "The name that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      }
+    },
+    "/api/news/": {
+      "post": {
+        "tags": [
+          "news"
+        ],
+        "summary": "Create project",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createProject",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/News"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation."
+          },
+          "400": {
+            "description": "Invalid name supplied."
+          },
+          "409": {
+            "description": "Name already exists."
+          },
+          "422": {
+            "description": "Missing Required Arguments."
+          },
+          "500": {
+            "description": "Database Problem."
+          }
+        }
+      }
+    },
+    "/api/news/{name}": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "summary": "Get project by name",
+        "description": "",
+        "operationId": "getProjectByName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name that needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "403": {
+            "description": "User not allowed"
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "login": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Roles": {
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "delete": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "News": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    }
+  }
+}
