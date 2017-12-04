@@ -2,6 +2,8 @@ FROM node:9
 
 USER node
 
+RUN mkdir -p /home/node/back-src
+
 WORKDIR /home/node/back-src
 
 COPY ./wait-for-it.sh /home/node/back-src
