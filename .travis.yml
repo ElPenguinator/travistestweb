@@ -12,6 +12,8 @@ before_install:
 - npm install -g node-gyp
 - touch .env
 - echo "NODE_PORT=3000" >> .env
+- cd ../front-src
+- npm install -g node-gyp
 before_script:
 - npm install -g standard
 - docker-compose build
