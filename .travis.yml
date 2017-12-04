@@ -10,6 +10,8 @@ node_js:
 before_install:
 - cd src/back-src
 - npm install -g node-gyp
+- touch .env
+- echo "NODE_PORT=3000" >> .env
 before_script:
 - npm install -g standard
 - docker-compose build
