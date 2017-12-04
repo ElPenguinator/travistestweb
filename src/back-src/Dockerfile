@@ -14,4 +14,5 @@ RUN npm install
 
 EXPOSE 3000
 
-CMD ["./wait-for-it.sh", "mariadb:3306", "-t", "30", "--", "./wait-for-it.sh", "mongodb:27017", "-t", "30", "--", "npm", "run", "docker-dev"]
+#CMD ["./wait-for-it.sh", "mariadb:3306", "-t", "30", "--", "./wait-for-it.sh", "mongodb:27017", "-t", "30", "--", "npm", "run", "docker-dev"]
+CMD ["npm", "run", "docker-dev"]
