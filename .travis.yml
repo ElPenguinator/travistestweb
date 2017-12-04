@@ -11,6 +11,7 @@ before_install:
 - cd src/back-src
 - npm install -g node-gyp
 - npm install pm2 -g
+- chmod 777 /home/node/.pm2
 - touch .env
 - echo "NODE_PORT=3000" >> .env
 before_script:
