@@ -7,15 +7,7 @@ cache:
   - node_modules
 node_js:
 - 6
-env:
-  - DOCKER_COMPOSE_VERSION=2.3
 before_install:
-- sudo apt-get update
-- sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
-- sudo rm /usr/local/bin/docker-compose
-- sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-- sudo chmod +x docker-compose
-- sudo mv docker-compose /usr/local/bin
 - cd src/back-src
 - npm install -g node-gyp
 before_script:
